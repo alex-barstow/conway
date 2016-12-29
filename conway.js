@@ -39,9 +39,11 @@ class ConwayGame {
   }
 
   cloneBoardArray() {
-    let clone = this.boardArray.map((row) => {
-      return row.slice();
-    });
+    let clone = [];
+
+    for (let i = 0; i < this.boardArray.length; i++) {
+      clone.push(this.boardArray[i].slice(0))
+    }
     return clone;
   }
 
@@ -82,7 +84,6 @@ class ConwayGame {
       }
     }
     this.boardArray = boardArrayClone;
-    console.log(this.boardArray);
     this.drawHTML();
   }
 
@@ -115,6 +116,4 @@ class ConwayGame {
 
 const conway = new ConwayGame;
 
-// conway.buildEmptyBoard(40);
-// conway.setInitialState(0);
 conway.runGame(50, 300, 100);

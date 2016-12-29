@@ -9,11 +9,3 @@ table {
 .header {
   text-align: center;
 }
-.controls {
-  text-align: center;
-  margin-top: 20px;
-}
-
-input {
-  width: 60px;
-}
