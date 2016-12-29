@@ -1,5 +1,5 @@
 # Conway's Game of Life
-A fun little project to practice my ES6 and vanilla JS DOM manipulation
+A fun little project to practice ES6 and vanilla JS DOM manipulation
 
 [Read about the origins of this game](https://en.wikipedia.org/wiki/Conway's_Game_of_Life)
 
