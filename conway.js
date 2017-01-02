@@ -39,7 +39,7 @@ class ConwayGame {
   }
 
   cloneBoardArray() {
-    let clone = [];
+    const clone = [];
 
     for (let i = 0; i < this.boardArray.length; i++) {
       clone.push(this.boardArray[i].slice(0))
@@ -66,11 +66,11 @@ class ConwayGame {
   }
 
   checkAndSetCells() {
-    let boardArrayClone = this.cloneBoardArray();
+    const boardArrayClone = this.cloneBoardArray();
 
     for (let i = 0; i < this.boardArray.length; i++) {
       for (let j = 0; j < this.boardArray[i].length; j++) {
-        let sum = this.getNeighborSum(i, j);
+        const sum = this.getNeighborSum(i, j);
 
         if (this.boardArray[i][j] === 1) {
           if (sum < 2 || sum > 3) {
@@ -88,15 +88,15 @@ class ConwayGame {
   }
 
   drawHTML() {
-    let gameDiv = document.getElementById('game-board');
-    let htmlTable = document.createElement('table');
+    const gameDiv = document.getElementById('game-board');
+    const htmlTable = document.createElement('table');
 
     for (let i = 0; i < this.boardArray.length; i++) {
-      let tableRowNode = document.createElement("tr");
+      const tableRowNode = document.createElement("tr");
       htmlTable.appendChild(tableRowNode);
 
       for (let j = 0; j < this.boardArray.length; j++) {
-        let tableDataNode = document.createElement("td");
+        const tableDataNode = document.createElement("td");
         tableRowNode.appendChild(tableDataNode);
         if (this.boardArray[i][j] === 1) {
           tableDataNode.style.backgroundColor = 'black';
@@ -110,7 +110,7 @@ class ConwayGame {
   runGame(boardDimension, aliveCellNum, timeInterval) {
     this.buildEmptyBoard(boardDimension);
     this.setInitialState(aliveCellNum);
-    let go = setInterval(this.checkAndSetCells, timeInterval);
+    setInterval(this.checkAndSetCells, timeInterval);
   }
 }
 
