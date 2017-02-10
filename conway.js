@@ -116,4 +116,4 @@ class ConwayGame {
 
 const conway = new ConwayGame;
 
-conway.runGame(50, 300, 100);
+conway.runGame(70, 900, 100);
