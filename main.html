@@ -10,8 +10,18 @@
     <div class="header">
       <h1>Conway's Game of Life</h1>
     </div>
-
-    <div id="game-board">
+    <div class="content-container">
+      <span id="game-div" class="column-6">
+      </span>
+      <span class="rules column-6">
+        <h2>Rules</h2>
+        <ol>
+          <li class="rule">Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.</li>
+          <li class="rule">Any live cell with two or three live neighbours lives on to the next generation.</li>
+          <li class="rule">Any live cell with more than three live neighbours dies, as if by overpopulation.</li>
+          <li class="rule">Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+        </ol>
+      </span>
     </div>
     <script src="conway.js"></script>
   </body>

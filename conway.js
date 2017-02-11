@@ -88,7 +88,7 @@ class ConwayGame {
   }
 
   drawHTML() {
-    const gameDiv = document.getElementById('game-board');
+    const gameDiv = document.getElementById('game-div');
     const htmlTable = document.createElement('table');
 
     for (let i = 0; i < this.boardArray.length; i++) {
