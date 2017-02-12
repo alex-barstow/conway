@@ -11,6 +11,7 @@
 class ConwayGame {
   constructor() {
     this.boardArray = [];
+    this.interval = null;
     this.checkAndSetCells = this.checkAndSetCells.bind(this);
   }
 
@@ -20,22 +21,39 @@ class ConwayGame {
     }
   }
 
-  setInitialState(aliveNumber) {
-    if (aliveNumber <= this.boardArray.length * this.boardArray.length) {
-      for (let i = 0; i < aliveNumber; i++) {
-        let rowNumber = Math.floor(Math.random() * this.boardArray.length);
-        let columnNumber = Math.floor(Math.random() * this.boardArray.length);
+  // setInitialState(aliveNumber) {
+  //   if (aliveNumber <= this.boardArray.length * this.boardArray[0].length) {
+  //     for (let i = 0; i < aliveNumber; i++) {
+  //       let rowNumber = Math.floor(Math.random() * this.boardArray.length);
+  //       let columnNumber = Math.floor(Math.random() * this.boardArray.length);
+  //
+  //       if (this.boardArray[rowNumber][columnNumber] !== 1) {
+  //         this.boardArray[rowNumber][columnNumber] = 1;
+  //       } else {
+  //         this.setInitialState(1);
+  //       }
+  //     }
+  //   } else {
+  //     console.log('Pick a valid number of cells');
+  //   }
+  //   this.drawHTML();
+  // }
 
-        if (this.boardArray[rowNumber][columnNumber] !== 1) {
-          this.boardArray[rowNumber][columnNumber] = 1;
-        } else {
-          this.setInitialState(1);
+  setInitialState(percentAlive) {
+    for (let i = 0; i < this.boardArray.length; i++) {
+      for (let j = 0; j < this.boardArray[0].length; j++) {
+        let randNum = Math.floor(Math.random() * 100) + 1;
+
+        if (randNum <= percentAlive) {
+          this.boardArray[i][j] = 1;
         }
       }
-    } else {
-      console.log('Pick a valid number of cells');
     }
-    this.drawHTML();
+    // Given that many cells in the intial state will die after the first
+    // generation, it makes sense not to call drawHTML() here so that there
+    // isn't a flicker effect when the game starts.
+
+    // this.drawHTML();
   }
 
   cloneBoardArray() {
@@ -95,7 +113,7 @@ class ConwayGame {
       const tableRowNode = document.createElement("tr");
       htmlTable.appendChild(tableRowNode);
 
-      for (let j = 0; j < this.boardArray.length; j++) {
+      for (let j = 0; j < this.boardArray[0].length; j++) {
         const tableDataNode = document.createElement("td");
         tableRowNode.appendChild(tableDataNode);
         if (this.boardArray[i][j] === 1) {
@@ -107,13 +125,24 @@ class ConwayGame {
     gameDiv.appendChild(htmlTable);
   }
 
-  runGame(boardDimension, aliveCellNum, timeInterval) {
+  runGame(boardDimension, percentAlive, timeInterval) {
     this.buildEmptyBoard(boardDimension);
-    this.setInitialState(aliveCellNum);
-    setInterval(this.checkAndSetCells, timeInterval);
+    this.setInitialState(percentAlive);
+    this.interval = setInterval(this.checkAndSetCells, timeInterval);
+  }
+
+  restartGame() {
+    clearInterval(this.interval);
+    this.boardArray = [];
+    this.runGame(80, 10, 100);
   }
 }
 
 const conway = new ConwayGame;
+const restartButton = document.getElementById('restart-button');
 
-conway.runGame(70, 900, 100);
+restartButton.addEventListener('click', () => {
+  conway.restartGame();
+})
+
+conway.runGame(80, 10, 100);
